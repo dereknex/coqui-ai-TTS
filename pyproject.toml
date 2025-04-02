@@ -126,11 +126,37 @@ zh = [
 ]
 # All language-specific dependencies
 languages = [
-    "coqui-tts[bn,ja,ko,zh]",
+    "bangla>=0.0.2",
+    "bnnumerizer>=0.0.2",
+    "bnunicodenormalizer>=0.1.0",
+    "hangul_romanize>=0.1.0",
+    "jamo>=0.4.1",
+    "g2pkk>=0.1.1",
+    "pip>=22.2",
+    "mecab-python3>=1.0.6",
+    "unidic-lite==1.0.8",
+    "cutlet>=0.2.0",
+    "jieba>=0.42.1",
+    "pypinyin>=0.40.0",
 ]
 # Installs all extras (except dev and docs)
 all = [
-    "coqui-tts[notebooks,server,bn,ja,ko,zh]",
+    "bokeh>=3.0.3",
+    "pandas>=1.4,<3.0",
+    "umap-learn>=0.5.1",
+    "flask>=3.0.0",
+    "bangla>=0.0.2",
+    "bnnumerizer>=0.0.2",
+    "bnunicodenormalizer>=0.1.0",
+    "hangul_romanize>=0.1.0",
+    "jamo>=0.4.1",
+    "g2pkk>=0.1.1",
+    "pip>=22.2",
+    "mecab-python3>=1.0.6",
+    "unidic-lite==1.0.8",
+    "cutlet>=0.2.0",
+    "jieba>=0.42.1",
+    "pypinyin>=0.40.0",
 ]
 
 [dependency-groups]
@@ -163,6 +189,11 @@ tts-server = "TTS.server.server:main"
 
 [tool.uv]
 constraint-dependencies = ["numba>0.58.0"]
+
+[tool.poetry]
+packages = [
+    { include = "TTS" }
+]
 
 [tool.hatch.build]
 exclude = [
