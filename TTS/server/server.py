@@ -11,6 +11,8 @@ import sys
 from threading import Lock
 from urllib.parse import parse_qs
 
+import torch
+
 try:
     from flask import Flask, render_template, render_template_string, request, send_file
 except ImportError as e:
@@ -35,7 +37,7 @@ def create_argparser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--model_name",
         type=str,
-        default="tts_models/en/ljspeech/tacotron2-DDC",
+        default="tts_models/multilingual/multi-dataset/xtts_v2",
         help="Name of one of the pre-trained tts models in format <language>/<dataset>/<model_name>",
     )
     parser.add_argument("--vocoder_name", type=str, default=None, help="name of one of the released vocoder models.")
@@ -88,6 +90,13 @@ if args.list_models:
 device = args.device
 if args.use_cuda:
     device = "cuda"
+else:
+    if torch.cuda.is_available():
+        device = "cuda"
+    elif torch.backends.mps.is_available():
+        device = "mps"
+    else:
+        device = "cpu"
 
 # CASE2: load models
 model_name = args.model_name if args.model_path is None else None
